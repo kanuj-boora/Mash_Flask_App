@@ -7,7 +7,7 @@ from moviepy.audio.AudioClip import concatenate_audioclips
 from pytube import YouTube, Search
 
 
-MEDIA_PATH = os.path.join(os.getcwd(), '/media/')
+MEDIA_PATH = '/media/'
 
 app = Flask(__name__)
 
@@ -26,6 +26,9 @@ def index():
         n = int(request.form["n"])
         y = int(request.form["y"])
         recv_email = str(request.form["email"])
+        
+        if not os.path.isdir('media'):
+            os.mkdir('media')
 
         audios = download_audio(singer, n)
         cut_audios = cut_audio(audios, y)
