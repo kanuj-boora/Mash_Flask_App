@@ -7,7 +7,7 @@ from moviepy.audio.AudioClip import concatenate_audioclips
 from pytube import YouTube, Search
 
 
-MEDIA_PATH = './media/'
+MEDIA_PATH = os.path.join(os.getcwd(), '/media/')
 
 app = Flask(__name__)
 
@@ -65,8 +65,8 @@ def download_audio(singer, n):
     audios = []
     count = 1
 
-    if not os.path.isdir(MEDIA_PATH):
-        os.mkdir('./media')
+    if not os.path.isdir('media'):
+        os.mkdir(os.getcwd()+'/media')
     
     for video in video_list.results:
         if count == n+1:
@@ -124,7 +124,7 @@ def remove_files(path):
                 shutil.rmtree(file_path)
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
-    print('Deleted files')
+
 
 if __name__ == "__main__":
     app.run()
