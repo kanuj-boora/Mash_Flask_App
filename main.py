@@ -65,6 +65,9 @@ def download_audio(singer, n):
     audios = []
     count = 1
 
+    if not os.path.isdir(MEDIA_PATH):
+        os.mkdir('./media')
+    
     for video in video_list.results:
         if count == n+1:
             print('Required number downloaded')
